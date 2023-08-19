@@ -1,8 +1,0 @@
-version: '3'
-services:
-  myapp:
-    image: jupyter/pyspark-notebook
-    ports:
-      - 8888:8888
-    volumes:
-      - .:/app  # This line maps the current directory to /app in the container
