@@ -2,6 +2,7 @@
 FROM jupyter/pyspark-notebook as base
 WORKDIR /app
 RUN pip install pipenv
+COPY config/kaggle.json /home/jovyan/.kaggle/kaggle.json
 COPY Pipfile Pipfile
 COPY config/ config/
 COPY src/ src/

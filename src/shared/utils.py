@@ -1,6 +1,7 @@
 import logging.config
 import os
 import json
+from kaggle.api import dataset_download_files
 
 LOGGING_CONFIG_FILE = 'logging.json'
 LOGGER_NAME = 'myapp'
@@ -23,3 +24,14 @@ def setup_logger():
 
 # Initialize the logger when the module is imported
 logger = setup_logger()
+
+#TBC
+def download_data(
+        dataset_url = 
+):
+    dataset_download_files(
+        dataset = ,
+        path = ,
+        force = false,
+        unzip = True
+    )
