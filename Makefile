@@ -6,14 +6,17 @@ DEVCONTAINER = $(BASENAME)-prod-c
 PRODIMAGE = $(BASENAME)-prod:$(TAG)
 PRODCONTAINER = $(BASENAME)-prod-c
 
-build-dev:
+dev-build:
 	docker build . -t $(DEVIMAGE) --target=dev
 
-build-prod:
+prod-build:
 	docker build . -t $(PRODIMAGE) --target=prod
 
-run-dev:
-	docker run -it --name $(DEVCONTAINER) --rm -p 8888:8888 -v $(pwd):/app "$(DEVIMAGE)"
+dev-run:
+	docker run -it --name $(DEVCONTAINER) --rm -v $(PWD):/app "$(DEVIMAGE)" /bin/bash
 
-run-prod:
+dev-test:
+	docker run --name $(DEVCONTAINER) --rm "$(DEVIMAGE)" pipenv run pytest
+
+prod-run:
 	docker run -it --name $(PRODCONTAINER) --rm -p 8888:8888 -v $(pwd):/app "$(PRODIMAGE)"
