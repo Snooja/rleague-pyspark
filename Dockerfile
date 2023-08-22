@@ -1,20 +1,27 @@
-# Base image
-FROM jupyter/pyspark-notebook as base
+# Based on the principle that everything in Prod is also in Dev
+# Dev just has additional stuff
+# Therefore we can build on top of prod image to make dev
+FROM jupyter/pyspark-notebook as prod
 WORKDIR /app
-RUN pip install pipenv
-COPY config/kaggle.json /home/jovyan/.kaggle/kaggle.json
-#RUN chmod 600 /home/jovyan/.kaggle/kaggle.json
+
 COPY Pipfile Pipfile
+COPY Pipfile.lock Pipfile.lock
 COPY config/ config/
 COPY src/ src/
 
-# Dev includes tests and notebooks and uses the dev pipenv install
-FROM base as dev
+RUN pip install --upgrade pip
+RUN pip install pipenv
+RUN pipenv requirements > /tmp/requirements.txt  && \
+    pip install -r /tmp/requirements.txt && \
+    rm /tmp/requirements.txt
+
+# Dev includes tests and notebooks and additinoal dev packages
+FROM prod as dev
+
 COPY tests/ tests/
 COPY notebooks/ notebooks/
-RUN pipenv install --dev
 
-# Prod
-FROM base as prod
-RUN pipenv install 
+RUN pipenv requirements --dev-only > /tmp/dev_requirements.txt && \
+    pip install -r /tmp/dev_requirements.txt && \
+    rm /tmp/dev_requirements.txt
 

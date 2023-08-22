@@ -159,9 +159,5 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
-#Pipenv 
-#   I'm just using the Pipfile directly for now without the .lock
-Pipfile.lock 
-
 # Credentials
 kaggle.json

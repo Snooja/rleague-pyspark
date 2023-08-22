@@ -12,8 +12,11 @@ dev-build:
 prod-build:
 	docker build . -t $(PRODIMAGE) --target=prod
 
-dev-run:
+dev-terminal:
 	docker run -it --name $(DEVCONTAINER) --rm -v $(PWD):/app "$(DEVIMAGE)" /bin/bash
+
+dev-jupyter:
+	docker run -it --name $(DEVCONTAINER) --rm -v $(PWD):/app -p 8888:8888 "$(DEVIMAGE)"
 
 dev-test:
 	docker run --name $(DEVCONTAINER) --rm "$(DEVIMAGE)" pipenv run pytest
