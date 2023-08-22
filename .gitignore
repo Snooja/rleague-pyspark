@@ -161,3 +161,7 @@ cython_debug/
 
 # Credentials
 kaggle.json
+
+# Get outa here
+.DS_Store
+data/
