@@ -13,9 +13,9 @@ Completed:
 * Common logger set up in src\shared\utils.py using config\logging.json.
 * Migrated from Make commands to .devcontainer for development including mounting api key directories. 
 * Relative imports in src folder working from script directly, main.py, and pytest.
+* Jupyter notebooks now work using /opt/venv/bin/python as the interpreter
 
 ## TODO
-* Get jupyter notebooks or lab working with .devcontainer setup.
 * Finish extract and transform steps in notebook then migrate to etl.py
 * Load data ?somewhere? ready for analysis stage
 
